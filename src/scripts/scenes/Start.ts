@@ -46,10 +46,10 @@ export default class Start extends Phaser.Scene {
       .setColor('#ffffff')
       .setOrigin(0.5);
 
-    const button = this.add.sprite(centerX, centerY + 370, 'buttonStart');
+    const button = this.add.sprite(centerX, centerY + 370, 'buttonStart').setScale(Settings.isMobile() ? 0.7 : 0.6);
     const logo = this.add.sprite(centerX, 150, 'logo');
     if (!Settings.isMobile()) {
-      button.setScale(0.7);
+      //button.setScale(0.7);
       logo.setScale(0.8);
     }
 

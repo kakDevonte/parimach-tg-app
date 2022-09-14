@@ -30,12 +30,19 @@ export default class ImpactForce {
       .setOrigin(0.5);
   }
 
-  public setScale(value: number): void {
-    if (value * 4 >= 330) return;
+  public setScale(value: number, points: number): void {
+    if (value > 100) return;
 
     this.scale.setVisible(true);
-    this.scale.setDisplaySize(value * 4, 70);
-    //his.scale.setSize(value * 3.3, 70);
+    this.scale.setDisplaySize(value * 3.3, 70);
+    this.text.text = points + '';
+  }
+
+  public setPoints(value: number): void {
     this.text.text = value + '';
+  }
+
+  public resetScale(): void {
+    this.scale.setDisplaySize(0, 70);
   }
 }

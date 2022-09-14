@@ -7,6 +7,15 @@ class User {
   private _record: number = 0;
   private _health: number = 0;
   private _timer: number = 0;
+  private _isWin: boolean = false;
+
+  public setIsWin(value: boolean) {
+    this._isWin = value;
+  }
+
+  public getIsWin(): boolean {
+    return this._isWin;
+  }
 
   public setID(id: string): string {
     this._id = id;

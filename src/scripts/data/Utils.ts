@@ -41,14 +41,16 @@ export default class Utils {
   }
 
   public static clickButton(scene: Phaser.Scene, button: any, action: () => void): void {
+    const currScale = button.scale;
+
     button.setInteractive();
     button.on('pointerdown', (): void => {
       button.press = true;
       button.increase = false;
       let counter: number = 0;
       let interval = scene.time.addEvent({ delay: 5, callback: () => {
-          if (button.scale > 0.9 && !button.increase) {
-            let scale: number = button.scale - 0.1;
+          if (!button.increase) {
+            let scale: number = button.scale - 0.01;
             button.scale = Number(scale.toFixed(2));
           }
           counter++;
@@ -61,11 +63,11 @@ export default class Utils {
         button.press = false;
         button.increase = true;
         let interval = scene.time.addEvent({ delay: 10, callback: () => {
-            if (button.scale < 1 && button.increase) {
-              let scale: number = button.scale + 0.05;
+            if (button.increase) {
+              let scale: number = button.scale + 0.01;
               button.scale = Number(scale.toFixed(2));
             }
-            if (button.scale >= 1) interval.remove(false);
+            if (button.scale >= currScale) interval.remove(false);
           }, callbackScope: scene, loop: true });
       }
     });
@@ -75,11 +77,11 @@ export default class Utils {
         button.press = false;
         button.increase = true;
         let interval = scene.time.addEvent({ delay: 10, callback: () => {
-            if (button.scale < 1 && button.increase) {
+            if (button.increase) {
               let scale: number = button.scale + 0.05;
               button.scale = Number(scale.toFixed(2));
             }
-            if (button.scale >= 1) interval.remove(false);
+            if (button.scale >= currScale) interval.remove(false);
           }, callbackScope: scene, loop: true });
         action();
       }
