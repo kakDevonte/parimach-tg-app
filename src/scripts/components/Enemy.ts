@@ -24,7 +24,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
 
   public init(): void {
     this.scene.add.existing(this);
-    this.setScale(Settings.isMobile() ? 0.43 : 0.34);
+    this.setScale(Settings.isMobile() ? 0.38 : 0.34);
     this.anims.play('idleEnemy');
   }
 

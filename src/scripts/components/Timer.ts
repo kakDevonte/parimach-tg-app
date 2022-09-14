@@ -26,11 +26,11 @@ export default class Timer {
 
   public tick(): void {
     this.timeInSeconds--;
-    this.text.text = this.timeInSeconds + '';
+    this.text.text = this.timeInSeconds + ' ';
   }
 
   public resetTimer(): void {
     this.timeInSeconds = 5;
-    this.text.text = this.timeInSeconds + '';
+    this.text.text = this.timeInSeconds + ' ';
   }
 }

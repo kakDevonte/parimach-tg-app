@@ -113,7 +113,6 @@ export default class Game extends Phaser.Scene {
       this.impactScale.resetScale();
       this.playerLives++;
 
-
       this.time.addEvent({
         delay: 2000,
         callback: () => {
@@ -163,6 +162,7 @@ export default class Game extends Phaser.Scene {
     if(this.enemyHealth <= 0) {
       this.numberButton = 4;
     }
+
     this.isShowButton = true;
     this.button.setVisible(this.isShowButton);
     this.bgBlack.setVisible(this.isShowButton);
@@ -173,40 +173,38 @@ export default class Game extends Phaser.Scene {
     this.time.addEvent({
       delay: 1000,
       callback: () => {
-        this.buttonPause();
-
+        if (this.numberButton === 4) {
+          if(this.playerLives === 3) {
+            this.points *= 3;
+            this.impactScale.setPoints(this.points)
+          }if(this.playerLives === 2) {
+            this.points *= 2;
+            this.impactScale.setPoints(this.points)
+          }
+          User.setIsWin(true);
+          this.scene.stop();
+          this.scene.start('End');
+        }
+        else if (this.numberButton === 3) {
+          User.setIsWin(false);
+          this.scene.stop();
+          this.scene.start('End');
+        } else {
+          this.buttonPause();
+        }
       },
     });
   }
 
   private buttonPause(): void {
-    this.startTimer();
-    this.isShowButton = false;
-    this.button.setVisible(this.isShowButton);
-    this.bgBlack.setVisible(this.isShowButton);
+      this.startTimer();
+      this.isShowButton = false;
+      this.button.setVisible(this.isShowButton);
+      this.bgBlack.setVisible(this.isShowButton);
 
-
-    if (this.numberButton !== 0) {
-      this.lives.setLive(this.playerLives);
-      this.enemyLive.setLives(this.enemyHealth);
-    }
-
-    if (this.numberButton === 3) {
-      User.setIsWin(false);
-      this.scene.stop();
-      this.scene.start('End');
-    }
-    if (this.numberButton === 4) {
-      if(this.playerLives === 3) {
-        this.points *= 3;
-        this.impactScale.setPoints(this.points)
-      }if(this.playerLives === 2) {
-        this.points *= 2;
-        this.impactScale.setPoints(this.points)
+      if (this.numberButton !== 0) {
+        this.lives.setLive(this.playerLives);
+        this.enemyLive.setLives(this.enemyHealth);
       }
-      User.setIsWin(true);
-      this.scene.stop();
-      this.scene.start('End');
-    }
   }
 }

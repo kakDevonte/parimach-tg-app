@@ -23,7 +23,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
   public init(): void {
     this.scene.add.existing(this);
-    this.setScale(Settings.isMobile() ? 0.35 : 0.27);
+    this.setScale(Settings.isMobile() ? 0.30 : 0.27);
     this.anims.play('idle');
   }
 
